@@ -8,7 +8,9 @@ const StyledHeroImage = styled('img')(({ theme }) => ({
     maxWidth: '80%',
   },
   [theme.breakpoints.down('md')]: {
-    maxWidth: '70%',
+    maxWidth: '50%',
+    marginBottom: 0,
+    marginTop: '2rem'
   }
 }));
 
@@ -16,7 +18,6 @@ export const HeroImage = ({ image }) => {
   return (
     <StyledHeroImage
       src={image}
-      style={{ marginTop: '5rem', marginBottom: '5rem' }}
       alt=""
     />
   );

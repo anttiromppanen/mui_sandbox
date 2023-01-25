@@ -1,36 +1,19 @@
 import { Grid } from '@mui/material';
-import { HeroImage } from './HeroImage';
-import { HeroTextSection } from './HeroTextSection';
-
-const HeroSectionTextLeft = ({ image, heroHeading, heroText, textRight}) => {
-  return (
-    <>
-      <Grid
-        item
-        xs={12}
-        md={6}
-        p={5}
-        textAlign={textRight ? "left" : "right"}
-        order={!textRight ? { md: 1, xs: 2 } : { md: 2, xs: 2 }}
-      >
-        <HeroTextSection heroHeading={heroHeading} heroText={heroText} textRight={textRight} />
-      </Grid>
-      <Grid
-        item
-        xs={12} 
-        md={6}
-        textAlign="center"
-        order={!textRight ? { md: 2, xs: 1 } : { md: 1, xs: 1 }}>
-        <HeroImage image={image} />
-      </Grid>
-    </>
-  );
-};
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import { HeroSectionContent } from './HeroSectionContent';
 
 export const HeroSection = ({ ...props }) => {
+  const theme = useTheme();
+  const smallScreenActive = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
-    <Grid container alignItems="center" mr={2} ml={2} mb={8}>
-      <HeroSectionTextLeft {...props} />
+    <Grid container alignItems="center" mb={8} ml="auto" mr="auto" maxWidth="2200px">
+      {
+        smallScreenActive
+          ? <HeroSectionContent {...props} alignForText="center" />
+          : <HeroSectionContent {...props} />
+      }
     </Grid>
-  )
+  );
 };

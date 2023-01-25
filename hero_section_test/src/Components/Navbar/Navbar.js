@@ -1,13 +1,19 @@
 import * as React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { CssBaseline } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { styled } from '@mui/system';
+
+const NavLinkButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  display: 'block'
+}));
 
 export const Navbar = () => {
   const theme = useTheme();
@@ -17,7 +23,7 @@ export const Navbar = () => {
       <CssBaseline />
       <AppBar
         position="static"
-        sx={{ backgroundColor: theme.palette.success.main, color: 'black' }}
+        sx={{ backgroundColor: theme.palette.success.main, color: theme.palette.primary.main }}
       >
         <Toolbar>
           <IconButton
@@ -29,10 +35,11 @@ export const Navbar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <Button color="inherit">Login</Button>
+          <Box sx={{ flexGrow: 1, display: 'flex' }}>
+            <NavLinkButton component={RouterLink} to="/">About</NavLinkButton>
+            <NavLinkButton component={RouterLink} to="/contact-us">Contact us</NavLinkButton>
+          </Box>
+          <NavLinkButton component={RouterLink} to="login">Login</NavLinkButton>
         </Toolbar>
       </AppBar>
     </Box>
